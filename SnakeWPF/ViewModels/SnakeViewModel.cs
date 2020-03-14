@@ -1,14 +1,24 @@
 ﻿using SnakeWPF.Commands;
 using SnakeWPF.Managers;
 using SnakeWPF.Models;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SnakeWPF.ViewModels
 {
-    class SnakeViewModel : BaseViewModel
+    public class SnakeViewModel : BaseViewModel
     {
-        private readonly Snake snake;
-        private readonly Timer timer;
+        private SnakeElement snakeHead;
+        public Timer Timer { get; }
+        public CollisionManager collisionManager;
+        public LocatorViewModel Locator;
+        public MovementManager MovementManager;
+
+        public int previousX;
+        public int previousY;
 
         public ICommand leftCommand { get; }
         public ICommand rightCommand { get; }
@@ -17,58 +27,97 @@ namespace SnakeWPF.ViewModels
 
         public SnakeViewModel()
         {
-            snake = new Snake(0, 0);
-            timer = new Timer();
-            timer.dispatcherTimer.Start();
+            snakeHead = new SnakeElement(0, 0, 20, 20);
+            collisionManager = new CollisionManager();
+            Timer = new Timer();
+            Timer.dispatcherTimer.Start();
+            Locator = new LocatorViewModel();
+            MovementManager = new MovementManager(this, Locator.Food);
 
             leftCommand = new RelayCommand(LeftAction, () => true);
             rightCommand = new RelayCommand(RightAction, () => true);
             upCommand = new RelayCommand(UpAction, () => true);
             downCommand = new RelayCommand(DownAction, () => true);
+
+            guiTail = new ObservableCollection<SnakeElement>();
+            GuiTail = new ObservableCollection<SnakeElement>();
         }
 
         public int HeadX
         {
-            get { return snake.Head.X; }
+            get { return snakeHead.X; }
             set
             {
-                snake.Head.X = value;
+                snakeHead.X = value;
                 OnPropertyChanged("HeadX");
             }
         }
 
         public int HeadY
         {
-            get { return snake.Head.Y; }
+            get { return snakeHead.Y; }
             set
             {
-                snake.Head.Y = value;
+                snakeHead.Y = value;
                 OnPropertyChanged("HeadY");
+            }
+        }
+
+        public int Width { get { return snakeHead.Width; } }
+        public int Height { get { return snakeHead.Height; } }
+
+        private ObservableCollection<SnakeElement> guiTail;
+        public ObservableCollection<SnakeElement> GuiTail
+        {
+            get { return guiTail; }
+            set
+            {
+                guiTail = value;
+                OnPropertyChanged("GuiTail");
             }
         }
 
         private void LeftAction()
         {
-            timer.RemoveHandlers();
-            timer.dispatcherTimer.Tick += (sender, e) => { HeadX -= 20; };
+            MovementManager.MoveAction(Movement.Left, -20);
         }
 
         private void RightAction()
         {
-            timer.RemoveHandlers();
-            timer.dispatcherTimer.Tick += (sender, e) => { HeadX += 20; };
+            MovementManager.MoveAction(Movement.Right, 20);
         }
 
         private void UpAction()
         {
-            timer.RemoveHandlers();
-            timer.dispatcherTimer.Tick += (sender, e) => { HeadY -= 20; };
+            MovementManager.MoveAction(Movement.Up, -20);
         }
 
         private void DownAction()
         {
-            timer.RemoveHandlers();
-            timer.dispatcherTimer.Tick += (sender, e) => { HeadY += 20; };
+            MovementManager.MoveAction(Movement.Down, 20);
+        }
+
+        public void TailExtend(SnakeElement lastElement)
+        {
+            if (!GuiTail.Any())
+            {
+                GuiTail.Add(new SnakeElement
+                {
+                    X = previousX,
+                    Y = previousY,
+                    Height = this.Height,
+                    Width = this.Width
+                });
+                return;
+            }
+
+            GuiTail.Add(new SnakeElement
+            {
+                X = lastElement.X,
+                Y = lastElement.Y,
+                Height = this.Height,
+                Width = this.Width
+            });
         }
     }
 }

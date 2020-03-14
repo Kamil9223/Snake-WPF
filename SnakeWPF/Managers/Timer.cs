@@ -4,7 +4,7 @@ using System.Windows.Threading;
 
 namespace SnakeWPF.Managers
 {
-    class Timer
+    public class Timer
     {
         public DispatcherTimer dispatcherTimer;
 

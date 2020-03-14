@@ -1,6 +1,6 @@
 ﻿namespace SnakeWPF.Models
 {
-    class Window
+    public class Window
     {
         public double Width { get; }
         public double Height { get; }

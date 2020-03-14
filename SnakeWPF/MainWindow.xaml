@@ -6,25 +6,41 @@
         xmlns:local="clr-namespace:SnakeWPF"
         xmlns:vm="clr-namespace:SnakeWPF.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="{Binding WindowHeight}" Width="{Binding WindowWidth}" ResizeMode="CanMinimize"
-        DataContext="{StaticResource windomVM}" x:Name="Windom">
-    <Window.Resources>
-        <vm:FoodViewModel x:Key="FoodVM" />
-        <vm:SnakeViewModel x:Key="SnakeVM" />
-    </Window.Resources>
+        DataContext="{Binding WindowOptions, Source={StaticResource Locator}}" x:Name="Window"
+        Title="MainWindow" Height="{Binding WindowHeight}" Width="{Binding WindowWidth}" ResizeMode="CanMinimize">
 
-    <Canvas Background="DarkGreen" DataContext="{StaticResource SnakeVM}" FocusManager.FocusedElement="{Binding ElementName=SnakeHead}">
-        <Canvas.InputBindings>
-            <KeyBinding Key="Left" Command="{Binding leftCommand}"/>
-            <KeyBinding Key="Right" Command="{Binding rightCommand}" />
-            <KeyBinding Key="Up" Command="{Binding upCommand}" />
-            <KeyBinding Key="Down" Command="{Binding downCommand}" />
-        </Canvas.InputBindings>
-        
-        <Rectangle Focusable="True" x:Name="SnakeHead" Width="20" Height="20" Fill="Crimson"
-                   Canvas.Top="{Binding HeadY}" Canvas.Left="{Binding HeadX}"/>
+    <Grid>
+        <Canvas DataContext="{Binding Source={StaticResource Locator}, Path=Snake}"
+             Background="DarkGreen" FocusManager.FocusedElement="{Binding ElementName=SnakeHead}">
+            <Canvas.InputBindings>
+                <KeyBinding Key="Left" Command="{Binding leftCommand}"/>
+                <KeyBinding Key="Right" Command="{Binding rightCommand}" />
+                <KeyBinding Key="Up" Command="{Binding upCommand}" />
+                <KeyBinding Key="Down" Command="{Binding downCommand}" />
+            </Canvas.InputBindings>
 
-        <Rectangle DataContext="{StaticResource FoodVM}" Width="20" Height="20" Fill="BurlyWood"
-                   x:Name="Food" Canvas.Top="{Binding Y}" Canvas.Left="{Binding X}"/>
-    </Canvas>
+            <ItemsControl ItemsSource="{Binding GuiTail}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas>
+                            <Rectangle Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}"
+                                    Width="{Binding Width}" Height="{Binding Height}" Fill="Blue" />
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Rectangle DataContext="{Binding Food, Source={StaticResource Locator}}" Width="{Binding Width}" Height="{Binding Height}" Fill="BurlyWood"
+                x:Name="Food" Canvas.Top="{Binding Y}" Canvas.Left="{Binding X}"/>
+
+            <Rectangle Focusable="True" x:Name="SnakeHead" Width="{Binding Width}" Height="{Binding Height}" Fill="Crimson"
+                Canvas.Top="{Binding HeadY}" Canvas.Left="{Binding HeadX}"/>
+        </Canvas>
+
+    </Grid>
+    
 </Window>
+
+    
+    
+    

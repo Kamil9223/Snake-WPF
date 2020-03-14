@@ -2,7 +2,7 @@
 
 namespace SnakeWPF.ViewModels
 {
-    class WindowViewModel : BaseViewModel
+    public class WindowViewModel : BaseViewModel
     {
         private readonly Window window;
 

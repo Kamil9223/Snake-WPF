@@ -1,4 +1,5 @@
 ﻿using SnakeWPF.Commands;
+using SnakeWPF.Managers;
 using SnakeWPF.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Windows.Input;
 
 namespace SnakeWPF.ViewModels
 {
-    class FoodViewModel : BaseViewModel
+    public class FoodViewModel : BaseViewModel
     {
         private readonly Food food;
         private Random random;
@@ -22,7 +23,8 @@ namespace SnakeWPF.ViewModels
             windomVM = new WindowViewModel();
             food = new Food(
                 random.Next(0, (int)((windomVM.WindowWidth-20) / 20)) * 20, 
-                random.Next(0, (int)((windomVM.WindowHeight-20) / 20)) * 20
+                random.Next(0, (int)((windomVM.WindowHeight-20) / 20)) * 20,
+                20, 20
             );
         }
         
@@ -44,6 +46,20 @@ namespace SnakeWPF.ViewModels
                 food.Y = value;
                 OnPropertyChanged("Y");
             }
+        }
+
+        public int Width { get { return food.Width; } }
+        public int Height { get { return food.Height; } }
+
+        public Food GetFood()
+        {
+            return this.food;
+        }
+
+        public void GenerateNewPosition()
+        {
+            X = random.Next(0, (int)((windomVM.WindowWidth - 20) / 20)) * 20;
+            Y = random.Next(0, (int)((windomVM.WindowHeight - 20) / 20)) * 20;
         }
     }
 }
