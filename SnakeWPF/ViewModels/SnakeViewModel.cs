@@ -97,7 +97,7 @@ namespace SnakeWPF.ViewModels
             MovementManager.MoveAction(Movement.Down, 20);
         }
 
-        public void TailExtend(SnakeElement lastElement)
+        public void TailExtend()
         {
             if (!GuiTail.Any())
             {
@@ -110,7 +110,7 @@ namespace SnakeWPF.ViewModels
                 });
                 return;
             }
-
+            var lastElement = GuiTail.Last();
             GuiTail.Add(new SnakeElement
             {
                 X = lastElement.X,

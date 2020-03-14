@@ -16,9 +16,11 @@ namespace SnakeWPF.Managers
         private readonly SnakeViewModel snakeVM;
         private readonly FoodViewModel foodVM;
         public Movement currentMoveDirection;
+        public LocatorViewModel Locator;
 
         public MovementManager(SnakeViewModel snakeVM, FoodViewModel foodVM)
         {
+            Locator = new LocatorViewModel();
             this.snakeVM = snakeVM;
             this.foodVM = foodVM;
         }
@@ -35,7 +37,7 @@ namespace SnakeWPF.Managers
 
                 var lastTailElement = MoveTail();
 
-                snakeVM.collisionManager.CollisionAction(snakeVM, foodVM, lastTailElement);
+                snakeVM.collisionManager.CollisionAction(snakeVM, foodVM, Locator.WindowOptions);
             };
         }
 

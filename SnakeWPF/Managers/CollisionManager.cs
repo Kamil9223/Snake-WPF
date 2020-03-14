@@ -10,7 +10,7 @@ namespace SnakeWPF.Managers
 {
     public class CollisionManager
     {
-        public bool IsCollision(SnakeViewModel snakeVM, FoodViewModel foodVM)
+        private bool IsCollisionWithFood(SnakeViewModel snakeVM, FoodViewModel foodVM)
         {
             return (snakeVM.HeadX + snakeVM.Width > foodVM.X && 
                 snakeVM.HeadX < foodVM.X + foodVM.Width &&
@@ -18,13 +18,26 @@ namespace SnakeWPF.Managers
                 snakeVM.HeadY + snakeVM.Height > foodVM.Y);
         }
 
-        public void CollisionAction(SnakeViewModel snakeVM, FoodViewModel foodVM, SnakeElement lastElement)
+        private bool IsCollisionWithBorder(SnakeViewModel snakeVM, WindowViewModel windowVM)
         {
-            if (!IsCollision(snakeVM, foodVM))
-                return;
+            return (snakeVM.HeadX < 0 ||
+                snakeVM.HeadX + snakeVM.Width > windowVM.WindowWidth ||
+                snakeVM.HeadY < 0 ||
+                snakeVM.HeadY + snakeVM.Height > windowVM.WindowHeight);
+        }
 
-            foodVM.GenerateNewPosition();
-            snakeVM.TailExtend(lastElement);
+        public void CollisionAction(SnakeViewModel snakeVM, FoodViewModel foodVM, WindowViewModel windowVM)
+        {
+            if (IsCollisionWithFood(snakeVM, foodVM))
+            {
+                foodVM.GenerateNewPosition();
+                snakeVM.TailExtend();
+            }
+
+            if (IsCollisionWithBorder(snakeVM, windowVM))
+            {
+                foodVM.GenerateNewPosition();
+            }
         }
     }
 }
