@@ -5,6 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:SnakeWPF"
              xmlns:vm="clr-namespace:SnakeWPF.ViewModels"
+             xmlns:views="clr-namespace:SnakeWPF.Views"
+             xmlns:pages="clr-namespace:SnakeWPF.Managers"
              StartupUri="MainWindow.xaml"
              mc:Ignorable="d">
     <Application.Resources>

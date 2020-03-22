@@ -70,8 +70,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\ApplicationPageConverter.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
+    <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\MovementManager.cs" />
+    <Compile Include="Managers\PageDefinition.cs" />
     <Compile Include="Managers\Timer.cs" />
     <Compile Include="Models\Window.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -79,6 +82,12 @@
     <Compile Include="ViewModels\LocatorViewModel.cs" />
     <Compile Include="ViewModels\SnakeViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
+    <Compile Include="Views\Board.xaml.cs">
+      <DependentUpon>Board.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SideMenu.xaml.cs">
+      <DependentUpon>SideMenu.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,6 +100,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Board.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SideMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Food.cs" />

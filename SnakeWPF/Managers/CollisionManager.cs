@@ -36,7 +36,7 @@ namespace SnakeWPF.Managers
 
             if (IsCollisionWithBorder(snakeVM, windowVM))
             {
-                foodVM.GenerateNewPosition();
+                //action game over from GameManager
             }
         }
     }
