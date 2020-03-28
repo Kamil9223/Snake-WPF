@@ -9,7 +9,7 @@
 
     <Grid>
         <Canvas DataContext="{Binding Source={StaticResource Locator}, Path=Snake}"
-             Background="DarkGreen" FocusManager.FocusedElement="{Binding ElementName=SnakeHead}">
+             Background="Black" FocusManager.FocusedElement="{Binding ElementName=SnakeHead}">
             <Canvas.InputBindings>
                 <KeyBinding Key="Left" Command="{Binding leftCommand}"/>
                 <KeyBinding Key="Right" Command="{Binding rightCommand}" />
@@ -22,7 +22,7 @@
                     <DataTemplate>
                         <Canvas>
                             <Rectangle Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}"
-                                    Width="{Binding Width}" Height="{Binding Height}" Fill="Blue" />
+                                    Width="{Binding Width}" Height="{Binding Height}" Fill="RosyBrown" />
                         </Canvas>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -31,7 +31,7 @@
             <Rectangle DataContext="{Binding Food, Source={StaticResource Locator}}" Width="{Binding Width}" Height="{Binding Height}" Fill="BurlyWood"
                 x:Name="Food" Canvas.Top="{Binding Y}" Canvas.Left="{Binding X}"/>
 
-            <Rectangle Focusable="True" x:Name="SnakeHead" Width="{Binding Width}" Height="{Binding Height}" Fill="Crimson"
+            <Rectangle Focusable="True" x:Name="SnakeHead" Width="{Binding Width}" Height="{Binding Height}" Fill="Firebrick"
                 Canvas.Top="{Binding HeadY}" Canvas.Left="{Binding HeadX}"/>
         </Canvas>
     </Grid>

@@ -21,9 +21,9 @@ namespace SnakeWPF.Managers
         private bool IsCollisionWithBorder(SnakeViewModel snakeVM, WindowViewModel windowVM)
         {
             return (snakeVM.HeadX < 0 ||
-                snakeVM.HeadX + snakeVM.Width > windowVM.WindowWidth ||
+                snakeVM.HeadX + snakeVM.Width > windowVM.BoardWidth ||
                 snakeVM.HeadY < 0 ||
-                snakeVM.HeadY + snakeVM.Height > windowVM.WindowHeight);
+                snakeVM.HeadY + snakeVM.Height > windowVM.WindowHeight - 40);
         }
 
         public void CollisionAction(SnakeViewModel snakeVM, FoodViewModel foodVM, WindowViewModel windowVM)
@@ -36,7 +36,7 @@ namespace SnakeWPF.Managers
 
             if (IsCollisionWithBorder(snakeVM, windowVM))
             {
-                //action game over from GameManager
+                
             }
         }
     }

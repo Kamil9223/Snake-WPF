@@ -7,24 +7,17 @@
       d:DesignHeight="600" d:DesignWidth="160"
       Title="SideMenu">
 
-    <Grid Background="Brown" DataContext="{Binding Food, Source={StaticResource Locator}}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="17*"/>
-            <ColumnDefinition Width="23*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="DarkSlateGray" DataContext="{Binding Snake, Source={StaticResource Locator}}"
+          Opacity="0.7">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding X, StringFormat=X: {0}}" />
-        <TextBlock Text="{Binding Y, StringFormat=Y: {0}}" Grid.Column="1" Margin="14,0,10,0"  />
+        <TextBlock Text="Points" HorizontalAlignment="Center" FontSize="30" 
+                   FontFamily="Arial" FontStyle="Italic" Foreground="Cyan"
+                   Grid.Row="0"/>
 
-        <TextBlock DataContext="{Binding Snake, Source={StaticResource Locator}}" 
-                   Text="{Binding HeadX, StringFormat=HeadX: {0}}"
-                   Grid.Row="1"/>
-
-        <TextBlock DataContext="{Binding Snake, Source={StaticResource Locator}}" 
-                   Text="{Binding HeadY, StringFormat=HeadY: {0}}"
-                   Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Text="{Binding GuiTail.Count}" Grid.Row="1" HorizontalAlignment="Center"
+                   FontWeight="Bold" FontSize="20"/>
     </Grid>
 </Page>
