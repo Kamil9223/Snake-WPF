@@ -9,48 +9,18 @@
         DataContext="{Binding WindowOptions, Source={StaticResource Locator}}" x:Name="Window"
         Title="MainWindow" Height="{Binding WindowHeight}" Width="{Binding WindowWidth}" ResizeMode="CanMinimize">
 
-    <!--<Grid>
-        <Canvas DataContext="{Binding Source={StaticResource Locator}, Path=Snake}"
-             Background="DarkGreen" FocusManager.FocusedElement="{Binding ElementName=SnakeHead}">
-            <Canvas.InputBindings>
-                <KeyBinding Key="Left" Command="{Binding leftCommand}"/>
-                <KeyBinding Key="Right" Command="{Binding rightCommand}" />
-                <KeyBinding Key="Up" Command="{Binding upCommand}" />
-                <KeyBinding Key="Down" Command="{Binding downCommand}" />
-            </Canvas.InputBindings>
-
-            <ItemsControl ItemsSource="{Binding GuiTail}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Canvas>
-                            <Rectangle Canvas.Left="{Binding X}" Canvas.Top="{Binding Y}"
-                                    Width="{Binding Width}" Height="{Binding Height}" Fill="Blue" />
-                        </Canvas>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <Rectangle DataContext="{Binding Food, Source={StaticResource Locator}}" Width="{Binding Width}" Height="{Binding Height}" Fill="BurlyWood"
-                x:Name="Food" Canvas.Top="{Binding Y}" Canvas.Left="{Binding X}"/>
-
-            <Rectangle Focusable="True" x:Name="SnakeHead" Width="{Binding Width}" Height="{Binding Height}" Fill="Crimson"
-                Canvas.Top="{Binding HeadY}" Canvas.Left="{Binding HeadX}"/>
-        </Canvas>
-
-    </Grid>-->
-
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition Width="{Binding BoardWidth}" />
+            <ColumnDefinition  Width="{Binding SideMenuWidth}"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" >
+        <Grid Grid.Column="0" Width="{Binding}">
             <Frame x:Name="Board" 
                    Content="{Binding BoardPage, Converter={converters:ApplicationPageConverter}}"></Frame>
         </Grid>
 
-        <Grid Grid.Column="1" >
+        <Grid Grid.Column="1" Width="{Binding}" >
             <Frame x:Name="SideMenu" 
                    Content="{Binding SideMenu, Converter={converters:ApplicationPageConverter}}"></Frame>
         </Grid>

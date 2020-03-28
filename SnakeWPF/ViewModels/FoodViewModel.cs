@@ -22,8 +22,8 @@ namespace SnakeWPF.ViewModels
             random = new Random();
             windomVM = new WindowViewModel();
             food = new Food(
-                random.Next(0, (int)((windomVM.WindowWidth-20) / 20)) * 20, 
-                random.Next(0, (int)((windomVM.WindowHeight-20) / 20)) * 20,
+                random.Next(0, (int)((windomVM.BoardWidth-20) / 20)) * 20, 
+                random.Next(0, (int)((windomVM.WindowHeight-20) / 60)) * 20,
                 20, 20
             );
         }
@@ -58,8 +58,8 @@ namespace SnakeWPF.ViewModels
 
         public void GenerateNewPosition()
         {
-            X = random.Next(0, (int)((windomVM.WindowWidth - 20) / 20)) * 20;
-            Y = random.Next(0, (int)((windomVM.WindowHeight - 20) / 20)) * 20;
+            X = random.Next(0, (int)((windomVM.BoardWidth - 20) / 20)) * 20;
+            Y = random.Next(0, (int)((windomVM.WindowHeight - 60) / 20)) * 20;
         }
     }
 }
