@@ -26,6 +26,16 @@ namespace SnakeWPF.Managers
                 snakeVM.HeadY + snakeVM.Height > windowVM.WindowHeight - 40);
         }
 
+        private bool IsCollisionWithTail(SnakeViewModel snakeVM)
+        {
+            foreach(var tailPart in snakeVM.GuiTail)
+            {
+                if (snakeVM.HeadX == tailPart.X && snakeVM.HeadY == tailPart.Y)
+                    return true;
+            }
+            return false;
+        }
+
         public void CollisionAction(SnakeViewModel snakeVM, FoodViewModel foodVM, WindowViewModel windowVM)
         {
             if (IsCollisionWithFood(snakeVM, foodVM))
@@ -35,6 +45,11 @@ namespace SnakeWPF.Managers
             }
 
             if (IsCollisionWithBorder(snakeVM, windowVM))
+            {
+                snakeVM.SetToBeginningState();
+            }
+
+            if (IsCollisionWithTail(snakeVM))
             {
                 snakeVM.SetToBeginningState();
             }
