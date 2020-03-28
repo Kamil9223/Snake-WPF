@@ -36,7 +36,7 @@ namespace SnakeWPF.Managers
 
             if (IsCollisionWithBorder(snakeVM, windowVM))
             {
-                
+                snakeVM.SetToBeginningState();
             }
         }
     }

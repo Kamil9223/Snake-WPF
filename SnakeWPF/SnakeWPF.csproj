@@ -72,7 +72,6 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\ApplicationPageConverter.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
-    <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\MovementManager.cs" />
     <Compile Include="Managers\PageDefinition.cs" />
     <Compile Include="Managers\Timer.cs" />

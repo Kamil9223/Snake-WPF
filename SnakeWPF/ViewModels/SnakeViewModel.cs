@@ -39,7 +39,6 @@ namespace SnakeWPF.ViewModels
             upCommand = new RelayCommand(UpAction, () => true);
             downCommand = new RelayCommand(DownAction, () => true);
 
-            guiTail = new ObservableCollection<SnakeElement>();
             GuiTail = new ObservableCollection<SnakeElement>();
         }
 
@@ -118,6 +117,14 @@ namespace SnakeWPF.ViewModels
                 Height = this.Height,
                 Width = this.Width
             });
+        }
+
+        public void SetToBeginningState()
+        {
+            GuiTail.Clear();
+            HeadX = 0;
+            HeadY = 0;
+            Timer.RemoveHandlers();
         }
     }
 }
